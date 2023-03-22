@@ -1,5 +1,10 @@
 package entities;
 
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileReader;
+import java.io.IOException;
+
 /** 
  * MIT License
  *
@@ -56,12 +61,54 @@ public class Grafo {
     }
 
 
-    public void carregar(String nomeArquivo){
+    public void carregar(String arquivo){
+    	//GrafoEntrada.txt
+    	
+    	int numVertice;
+    	int numAresta;
+    	int [][] matrizIncidencia;
+    	
+    	File GrafoIn = new File(arquivo);		
+		try (BufferedReader br = new BufferedReader(new FileReader(GrafoIn))) {			
+			String linha = br.readLine();
+						
+				
+				String campos[] = linha.split(",");
+				numVertice = campos.length;
+				numAresta = 0;
+				
+				for(int i=0; i< numVertice; i++) {
+					if(campos[i].equals(1)) {
+						numAresta++;
+					}
+				}				
+				matrizIncidencia = new int[numVertice][numAresta];		
+				
+				int j = 0;
+				do {
+					campos = linha.split(",");
+					for(int i = 0; i< numVertice;i++) {
+						matrizIncidencia[i][j] = Integer.parseInt(campos[i]);
+					}
+					j++;
+				} while ((linha!= null));
+				
+				br.close();
+				
+				
+				
+				System.out.println("Carregou o arquivo");
+			} 
+		
+		
+			catch(IOException e) {
+			System.out.println("Error reading file: " + e.getMessage());
+		}		
 
     }
 
     public void salvar(String nomeArquivo){
-        
+        //GrafoSaida.txt
     }
     
     /**
