@@ -108,8 +108,8 @@ public class Grafo {
 			System.out.println("Error reading file: " + e.getMessage());
 		}		
 
-    }
-
+    }    
+    
     public void salvar(){
         //GrafoSaida.txt
     	
@@ -122,7 +122,7 @@ public class Grafo {
     		
     	    for (int i = 0; i < numVertice; i++) {
     	    	System.out.println();
-				for (int j = 0; j < numAresta; j++) {
+				for (int j = 0; j < numVertice; j++) {
 					bw.write(matrizIncidencia[i][j] + ",");
 					
 				
