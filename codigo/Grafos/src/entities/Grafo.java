@@ -1,6 +1,7 @@
 package entities;
 
 import java.io.BufferedReader;
+import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
@@ -36,9 +37,9 @@ import java.io.IOException;
 public class Grafo {
     public final String nome;
     private ABB<Vertice> vertices;
-    String[][] matrizIncidencia;
     int numVertice;
     int numAresta;
+    int [][] matrizIncidencia;
 
     public static Grafo grafoCompleto(int ordem){
         return null;
@@ -68,9 +69,8 @@ public class Grafo {
     public void carregar(){
     	//GrafoEntrada.txt
     	// usar as classes Vertice e Aresta futuramente
-    	int numVertice;
-    	int numAresta;
-    	int [][] matrizIncidencia;
+    
+    	
     	
     	
     	File Grafo = new File("C:\\Users\\Pedro\\Desktop\\Projeto2\\projeto2-grupo4-g2\\codigo\\Grafos\\src\\GrafoEntrada.txt");		
@@ -98,7 +98,10 @@ public class Grafo {
 					j++;
 				}				
 				br.close();						
-				System.out.println("Carregou o arquivo");
+				System.out.println("Grafo carregado com sucesso");
+				
+				System.out.println(numVertice);
+				System.out.println(numAresta);
 			} 		
 		
 			catch(IOException e) {
@@ -113,16 +116,23 @@ public class Grafo {
    
     	File saida = new File("C:\\Users\\Pedro\\Desktop\\Projeto2\\projeto2-grupo4-g2\\codigo\\Grafos\\src\\GrafoSaida.txt");
 
-    	try (FileWriter fw = new FileWriter(saida)) {
+    	try (BufferedWriter bw = new BufferedWriter( new FileWriter(saida))) {
 			
+    		//Esse for ta zuado
+    		
     	    for (int i = 0; i < numVertice; i++) {
+    	    	System.out.println();
 				for (int j = 0; j < numAresta; j++) {
-					fw.write(matrizIncidencia[i][j] + ",");
-					System.out.println( (matrizIncidencia[i][j] + ","));
+					bw.write(matrizIncidencia[i][j] + ",");
+					
+				
+					System.out.print( matrizIncidencia[i][j] + ",");
     	        }
-    	        fw.write("\n"); 
-    	        System.out.println("\n");
+    	        bw.write("\n"); 
+    	        
     	    }
+    	    System.out.println();
+    	    System.out.println();
     	    System.out.println("Matriz de incidência salva com sucesso!");
     	} catch (IOException e) {
     	    System.out.println("Erro ao salvar matriz de incidência: " + e.getMessage());

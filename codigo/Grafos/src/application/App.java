@@ -11,7 +11,7 @@ public class App {
 		grafo.carregar();
 		grafo.salvar();
 		
-		System.out.println(grafo);
+		
 
 	}
 
