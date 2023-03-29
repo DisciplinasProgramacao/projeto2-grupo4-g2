@@ -9,6 +9,9 @@ public class App {
 		Grafo grafo = new Grafo("Grafo1");
 		
 		grafo.carregar();
+		grafo.salvar();
+		
+		System.out.println(grafo);
 
 	}
 

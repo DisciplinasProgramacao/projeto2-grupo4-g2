@@ -3,6 +3,7 @@ package entities;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
+import java.io.FileWriter;
 import java.io.IOException;
 
 /** 
@@ -35,6 +36,9 @@ import java.io.IOException;
 public class Grafo {
     public final String nome;
     private ABB<Vertice> vertices;
+    String[][] matrizIncidencia;
+    int numVertice;
+    int numAresta;
 
     public static Grafo grafoCompleto(int ordem){
         return null;
@@ -103,8 +107,27 @@ public class Grafo {
 
     }
 
-    public void salvar(String nomeArquivo){
+    public void salvar(){
         //GrafoSaida.txt
+    	
+   
+    	File saida = new File("C:\\Users\\Pedro\\Desktop\\Projeto2\\projeto2-grupo4-g2\\codigo\\Grafos\\src\\GrafoSaida.txt");
+
+    	try (FileWriter fw = new FileWriter(saida)) {
+			
+    	    for (int i = 0; i < numVertice; i++) {
+				for (int j = 0; j < numAresta; j++) {
+					fw.write(matrizIncidencia[i][j] + ",");
+					System.out.println( (matrizIncidencia[i][j] + ","));
+    	        }
+    	        fw.write("\n"); 
+    	        System.out.println("\n");
+    	    }
+    	    System.out.println("Matriz de incidência salva com sucesso!");
+    	} catch (IOException e) {
+    	    System.out.println("Erro ao salvar matriz de incidência: " + e.getMessage());
+    	}
+
     }
     
     /**
@@ -125,7 +148,18 @@ public class Grafo {
     public Vertice existeVertice(int idVertice){
         return null;
     }
+    
+    //Metodo para gerar um grafo completo(Grafo onde cada vertice se liga a todos os outros vertices, matriz de incidencia toda preenchida com exceção das posições 1 1, 2 2, 3 3 etc)
 
+    
+    // Metodo para gerar um subgrafo a partir da matriz de incidencia do grafo original
+    
+    // Criar grafos com arestas ponderadas(|Vertice v1, Vertice v2, Int peso)
+    
+    //PARTE 2
+    //Criar a classe Grafo Mutavel que pode ter arestas ponderadas/direcionadas ou não
+    
+    
     /**
      * Adiciona uma aresta entre dois vértices do grafo, caso os dois vértices existam no grafo. 
      * Caso a aresta já exista, ou algum dos vértices não existir, o comando é ignorado e retorna FALSE.
