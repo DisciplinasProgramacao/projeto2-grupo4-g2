@@ -4,12 +4,11 @@ import entities.Grafo;
 
 public class App {
 
-	public static void main(String[] args) {
-		
+	public static void main(String[] args) {		
 		
 		Grafo grafo = new Grafo("Grafo1");
 		
-		grafo.carregar("GrafoEntrada.txt");
+		grafo.carregar();
 
 	}
 

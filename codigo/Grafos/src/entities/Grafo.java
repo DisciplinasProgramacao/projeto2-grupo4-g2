@@ -61,45 +61,41 @@ public class Grafo {
     }
 
 
-    public void carregar(String arquivo){
+    public void carregar(){
     	//GrafoEntrada.txt
-    	
+    	// usar as classes Vertice e Aresta futuramente
     	int numVertice;
     	int numAresta;
     	int [][] matrizIncidencia;
     	
-    	File GrafoIn = new File(arquivo);		
-		try (BufferedReader br = new BufferedReader(new FileReader(GrafoIn))) {			
-			String linha = br.readLine();
-						
+    	
+    	File Grafo = new File("C:\\Users\\Pedro\\Desktop\\Projeto2\\projeto2-grupo4-g2\\codigo\\Grafos\\src\\GrafoEntrada.txt");		
+		try (BufferedReader br = new BufferedReader(new FileReader(Grafo))) {			
+			
+			String linha = br.readLine();				
+			String campos[] = linha.split(",");
+			numVertice = campos.length;
+			numAresta = 0;
 				
-				String campos[] = linha.split(",");
-				numVertice = campos.length;
-				numAresta = 0;
-				
-				for(int i=0; i< numVertice; i++) {
-					if(campos[i].equals(1)) {
+			
+			while ((linha = br.readLine()) != null) {
+			for(int i=0; i< numVertice; i++) {
+					if(campos[i].equals("1")) {
 						numAresta++;
 					}
 				}				
 				matrizIncidencia = new int[numVertice][numAresta];		
 				
 				int j = 0;
-				do {
 					campos = linha.split(",");
 					for(int i = 0; i< numVertice;i++) {
 						matrizIncidencia[i][j] = Integer.parseInt(campos[i]);
 					}
 					j++;
-				} while ((linha!= null));
-				
-				br.close();
-				
-				
-				
+				}				
+				br.close();						
 				System.out.println("Carregou o arquivo");
-			} 
-		
+			} 		
 		
 			catch(IOException e) {
 			System.out.println("Error reading file: " + e.getMessage());
