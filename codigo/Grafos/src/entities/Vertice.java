@@ -1,5 +1,8 @@
 package entities;
 
+import java.util.LinkedList;
+import java.util.List;
+
 /** 
  * MIT License
  *
@@ -103,5 +106,11 @@ public class Vertice {
      */
     public boolean visitado(){
         return this.visitado;
+    }
+
+    public List<Integer> vizinhos() {
+        List<Integer> result =  new LinkedList<Integer>();
+        
+        return result;
     }
 }

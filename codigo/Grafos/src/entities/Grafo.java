@@ -36,7 +36,7 @@ import java.io.IOException;
  */
 public class Grafo {
     public final String nome;
-    private ABB<Vertice> vertices;
+    protected ABB<Vertice> vertices;
     int numVertice;
     int numAresta;
     int [][] matrizIncidencia;
