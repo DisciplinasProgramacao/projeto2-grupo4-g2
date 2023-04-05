@@ -35,6 +35,7 @@ import java.io.IOException;
  * Classe básica para um Grafo simples não direcionado.
  */
 public class Grafo {
+
 	public final String nome;
 	private ABB<Vertice> vertices;
 	int numVertice;
