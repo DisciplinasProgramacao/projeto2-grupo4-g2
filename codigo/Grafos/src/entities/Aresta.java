@@ -79,6 +79,12 @@ public class Aresta {
         return this.visitada;
     }
 
+	public Object getOrigem() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+
     
 
 }

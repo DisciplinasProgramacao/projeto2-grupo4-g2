@@ -38,8 +38,8 @@ public class Grafo {
 
 	public final String nome;
 	private ABB<Vertice> vertices;
-	int numVertice;
-	int numAresta;
+	private int numVertice;
+	private int numAresta;
 	int[][] matrizIncidencia;
 
 	public static Grafo grafoCompleto(int ordem) {
@@ -78,21 +78,21 @@ public class Grafo {
 
 			String linha = br.readLine();
 			String campos[] = linha.split(",");
-			numVertice = campos.length;
-			matrizIncidencia = new int[numVertice][numVertice];
+			setNumVertice(campos.length);
+			matrizIncidencia = new int[getNumVertice()][getNumVertice()];
 			
 			
-			numAresta = 0;
+			setNumAresta(0);
 			int j = 0;
 			while ((linha ) != null) {
 				campos = linha.split(",") ;
-				for (int i = 0; i < numVertice; i++) {
+				for (int i = 0; i < getNumVertice(); i++) {
 					if (campos[i].equals("1")) {
-						numAresta++;
+						setNumAresta(getNumAresta() + 1);
 					}
 				}
 
-				for (int i = 0; i < numVertice; i++) {
+				for (int i = 0; i < getNumVertice(); i++) {
 					matrizIncidencia[j][i] = Integer.parseInt(campos[i]);
 					
 
@@ -106,8 +106,8 @@ public class Grafo {
 			br.close();
 			System.out.println("Grafo carregado com sucesso");
 			
-			System.out.println(numVertice);
-			System.out.println(numAresta);
+			System.out.println(getNumVertice());
+			System.out.println(getNumAresta());
 			
 		}
 
@@ -118,8 +118,8 @@ public class Grafo {
 	}
 
 	public void imprimir() {
-		for (int i = 0; i < numVertice; i++) {
-			for (int j = 0; j < numVertice; j++) {
+		for (int i = 0; i < getNumVertice(); i++) {
+			for (int j = 0; j < getNumVertice(); j++) {
 				
 				System.out.print(matrizIncidencia[i][j] + ",");
 			}
@@ -139,9 +139,9 @@ public class Grafo {
 
 			// Esse for ta zuado
 
-			for (int i = 0; i < numVertice; i++) {
+			for (int i = 0; i < getNumVertice(); i++) {
 				System.out.println();
-				for (int j = 0; j < numVertice; j++) {
+				for (int j = 0; j < getNumVertice(); j++) {
 					bw.write(matrizIncidencia[i][j] + ",");
 
 					System.out.print(matrizIncidencia[i][j] + ",");
@@ -237,6 +237,22 @@ public class Grafo {
 
 	public int ordem() {
 		return Integer.MIN_VALUE;
+	}
+
+	public int getNumVertice() {
+		return numVertice;
+	}
+
+	public void setNumVertice(int numVertice) {
+		this.numVertice = numVertice;
+	}
+
+	public int getNumAresta() {
+		return numAresta;
+	}
+
+	public void setNumAresta(int numAresta) {
+		this.numAresta = numAresta;
 	}
 
 }
