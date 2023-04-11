@@ -33,7 +33,7 @@ public class Vertice {
     
     private ABB<Aresta> arestas;    
     private final int id;
-    private boolean visitado;
+    public boolean visitado;
 	
 
     /**
@@ -125,13 +125,6 @@ public class Vertice {
     }
     
     
-    public Iterator<Vertice> vizinhos() {
-        List<Vertice> vizinhos = new ArrayList<>();
-        for (Aresta aresta : arestas) {
-            vizinhos.add(grafo.getVertice(aresta.destino()));
-        }
-        return vizinhos.iterator();
-    }
 
     
     

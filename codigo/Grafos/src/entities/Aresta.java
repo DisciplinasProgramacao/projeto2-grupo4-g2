@@ -27,7 +27,7 @@ package entities;
 public class Aresta {
 
     private int peso;
-    private int destino;
+    public int destino;
     private boolean visitada;
 
     /**

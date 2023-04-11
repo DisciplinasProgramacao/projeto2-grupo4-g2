@@ -156,15 +156,6 @@ public class Grafo {
     	    }
     }
 
-    /**
-     * Retorna um subgrafo contendo apenas os vértices passados como parâmetro, e as arestas 
-     * que conectam estes vértices. 
-     * @param verticesSubgrafo Lista de vértices a serem mantidos no subgrafo
-     * @return Um novo grafo, contendo somente os vértices e arestas do subgrafo
-     */
-    public Grafo subgrafo(List<Integer> verticesSubgrafo) {
-        return null;
-    }
     
     public int tamanho(){
         return Integer.MIN_VALUE;
