@@ -41,6 +41,14 @@ public class Aresta {
         this.visitada = false;
     }
 
+    public Aresta(int destino){
+        this.peso = 0;
+        this.destino = destino;
+        this.visitada = false;
+    }
+    
+    
+    
     /**
      * Método de acesso para o peso da aresta
      * @return Peso da aresta (int)
@@ -78,13 +86,15 @@ public class Aresta {
     public boolean visitada(){
         return this.visitada;
     }
+    
+    
 
 	public Object getOrigem() {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
-
     
 
 }
+

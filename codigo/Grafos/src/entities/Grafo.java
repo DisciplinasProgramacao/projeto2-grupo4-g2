@@ -1,5 +1,7 @@
 package entities;
 
+import java.util.List;
+
 /** 
  * MIT License
  *
@@ -97,7 +99,7 @@ public class Grafo {
      * @param peso Peso da aresta
      * @return TRUE se foi inserida, FALSE caso contrário
      */
-    public boolean addAresta(int origem, int destino, int peso){
+    public boolean addArestaPonderada(int origem, int destino, int peso){
         boolean adicionou = false;
         Vertice saida = this.existeVertice(origem);
         Vertice chegada = this.existeVertice(destino);
@@ -107,6 +109,17 @@ public class Grafo {
         return adicionou;
 
     }
+    
+    public boolean addAresta(int origem, int destino){
+        boolean adicionou = false;
+        Vertice saida = this.existeVertice(origem);
+        Vertice chegada = this.existeVertice(destino);
+        if(saida!=null && chegada !=null){
+            adicionou = (saida.addAresta(destino)&&chegada.addAresta(origem));
+        }
+        return adicionou;
+    }
+
 
 
     public Aresta removeAresta(int origem, int destino){
@@ -123,8 +136,6 @@ public class Grafo {
     }
 
     
-
-    
     public Aresta existeAresta(int verticeA, int verticeB) {
         Vertice saidaA = this.existeVertice(verticeA);
         Vertice saidaB = this.existeVertice(verticeB);
@@ -139,16 +150,20 @@ public class Grafo {
     public void completo(int n){
     	   for (int i = 0; i < n; i++) {
     	        for (int j = i + 1; j < n; j++) {
-    	            this.addAresta(i, j, 1);
-    	            this.addAresta(j, i, 1);
+    	            this.addAresta(i, j);
+    	            this.addAresta(j, i);
     	        }
     	    }
     }
 
-    public Grafo subGrafo(Lista<Integer> vertices){
-        Grafo subgrafo = new Grafo("Subgrafo de "+this.nome);
-        
-        return subgrafo;
+    /**
+     * Retorna um subgrafo contendo apenas os vértices passados como parâmetro, e as arestas 
+     * que conectam estes vértices. 
+     * @param verticesSubgrafo Lista de vértices a serem mantidos no subgrafo
+     * @return Um novo grafo, contendo somente os vértices e arestas do subgrafo
+     */
+    public Grafo subgrafo(List<Integer> verticesSubgrafo) {
+        return null;
     }
     
     public int tamanho(){
@@ -163,5 +178,5 @@ public class Grafo {
     
     }
 
-    
+
 

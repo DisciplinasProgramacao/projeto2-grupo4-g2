@@ -19,13 +19,15 @@ public class App {
 		g.addVertice(4);
 		
 		
-		System.out.println("Aresta adicionada: "+g.addAresta(1, 2, 1));		
+		System.out.println("Aresta Ponderada adicionada: "+g.addArestaPonderada(1, 2, 1));
+		
+		System.out.println("Aresta NAO-Ponderada adicionada: "+g.addAresta(2, 3));
 		
 		System.out.println("Existe aresta: " + g.existeAresta(1, 2));
 		
-		System.out.println( g.existeVertice(1));
+		System.out.println("Existe vertice: " + g.existeVertice(1));
 		
-		System.out.println(g.removeAresta(1, 2));
+		System.out.println("Aresta removida: " + g.removeAresta(1, 2));
 		
 		
 		

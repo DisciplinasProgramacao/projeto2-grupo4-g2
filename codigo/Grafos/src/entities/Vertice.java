@@ -1,6 +1,7 @@
 package entities;
 
-import java.util.LinkedList;
+import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 /** 
@@ -33,6 +34,7 @@ public class Vertice {
     private ABB<Aresta> arestas;    
     private final int id;
     private boolean visitado;
+	
 
     /**
      * Construtor para criação de vértice identificado
@@ -42,9 +44,19 @@ public class Vertice {
         this.id = id;
         this.arestas = new ABB<Aresta>();
         this.visitado = false;
-    }
+    }  
     
-    /**
+    
+    public ABB<Aresta> getArestas() {
+		return arestas;
+	}    
+
+	public void setArestas(ABB<Aresta> arestas) {
+		this.arestas = arestas;
+	}
+
+
+	/**
      * Retorna o id do vértice, caso seja necessário para verificações próprias
      * @return Identificador do vértice (int)
      */
@@ -53,7 +65,11 @@ public class Vertice {
     }
     
     public boolean addAresta(int destino){
-        return false;
+    	   Aresta novaAresta = new Aresta(destino);
+    	    if (!this.arestas.equals(novaAresta)) {
+    	        return this.arestas.add(destino, novaAresta);
+    	    }
+    	    return false;
     }
 
     /**
@@ -106,6 +122,15 @@ public class Vertice {
      */
     public boolean visitado(){
         return this.visitado;
+    }
+    
+    
+    public Iterator<Vertice> vizinhos() {
+        List<Vertice> vizinhos = new ArrayList<>();
+        for (Aresta aresta : arestas) {
+            vizinhos.add(grafo.getVertice(aresta.destino()));
+        }
+        return vizinhos.iterator();
     }
 
     
