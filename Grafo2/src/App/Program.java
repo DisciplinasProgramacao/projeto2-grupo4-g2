@@ -6,85 +6,83 @@ import java.util.Scanner;
 public class Program {
 
 	public static void main(String[] args) {
-		
-		Scanner scanner = new Scanner(System.in);
-		ArrayList<GraphNode> nodeList = new ArrayList<GraphNode>();
-		
-		Graph grafo = null;
-		
-		
-		int opcao = 0;
 
-        do {
-            System.out.println("Menu");
+        Scanner scanner = new Scanner(System.in);
+        ArrayList<GraphNode> nodeList = new ArrayList<GraphNode>();
+
+        Graph grafo = null;
+
+        int opcao = 0;
+        while (opcao != 7) {
+            System.out.println("\nDigite a opção desejada:");
             System.out.println("1 - Criar grafo");
-            System.out.println("2 - Criar vertices: informe o nome o indice do vertice");
-            System.out.println("3 - Adicionar arestas: Se ponderada\n\t\tSe direcionada\n\t\tSenao aresta comum");
-            System.out.println("4 - Gerar subgrafo: Escolha a qtd de vertices");
-            System.out.println("5 - Busca em largura: informe o vertice inicial");
-            System.out.println("6 - Busca em profundidade: informe o vertice inicial");
-            System.out.println("7 - Salvar operações em arquivo txt");
-            System.out.println("0 - Sair");
+            System.out.println("2 - Adicionar aresta não direcionada");
+            System.out.println("3 - Adicionar aresta direcionada");
+            System.out.println("4 - Adicionar aresta ponderada");
+            System.out.println("5 - Busca em largura");
+            System.out.println("6 - Busca em profundidade");
+            System.out.println("7 - Sair");
 
             opcao = scanner.nextInt();
 
             switch (opcao) {
                 case 1:
-                    
-                    grafo = new Graph(nodeList);
-                    
-                    break;
-                case 2:
-                    System.out.println("Informe o nome do vertice: ");
-                    String nomeVertice = scanner.next();
-                    System.out.println("Informe o indice do vertice: ");
-                    int indiceVertice = scanner.nextInt();
-                    
-                    nodeList.add(new GraphNode(nomeVertice, indiceVertice));
-                    
-                    break;
-                case 3:
-                    System.out.println("Escolha o tipo de aresta:");
-                    System.out.println("1 - Ponderada");
-                    System.out.println("2 - Direcionada");
-                    System.out.println("3 - Comum");
-                    int tipoAresta = scanner.nextInt();
-                    
-                    if(tipoAresta == 1) {
-                    	
+                    System.out.println("Digite o número de nós do grafo: ");
+                    int numNodes = scanner.nextInt();
+                    scanner.nextLine();
+                    for (int i = 0; i < numNodes; i++) {
+                        System.out.println("Digite o nome do nó " + (i + 1) + ": ");
+                        String nodeName = scanner.nextLine();
+                        nodeList.add(new GraphNode(nodeName, i));
                     }
-                    
-                    //código para adicionar a aresta
+                    grafo = new Graph(nodeList);
                     break;
-                case 4:
-                    System.out.println("Informe a quantidade de vertices do subgrafo: ");
-                    int qtdVerticesSubgrafo = scanner.nextInt();
-                    //código para gerar o subgrafo
-                    break;
-                case 5:
-                    System.out.println("Informe o vertice inicial da busca em largura: ");
-                    int verticeInicialLargura = scanner.nextInt();
-                    //código para realizar a busca em largura
-                    break;
-                case 6:
-                    System.out.println("Informe o vertice inicial da busca em profundidade: ");
-                    int verticeInicialProfundidade = scanner.nextInt();
-                    //código para realizar a busca em profundidade
-                    break;
-                case 7:
-                    //código para salvar as operações em arquivo txt
-                    break;
-                case 0:
-                    System.out.println("Saindo...");
-                    break;
-                default:
-                    System.out.println("Opção inválida!");
-                    break;
-            }
 
-        } while (opcao != 0);
+                case 2:
+                    System.out.println("Digite os índices dos nós que deseja conectar (separados por espaço): ");
+                    int nodeIndex1 = scanner.nextInt();
+                    int nodeIndex2 = scanner.nextInt();
+                    grafo.addUndirectedEdge(nodeIndex1, nodeIndex2);
+                    break;
+
+                case 3:
+                    System.out.println("Digite os índices dos nós que deseja conectar (separados por espaço): ");
+                    nodeIndex1 = scanner.nextInt();
+                    nodeIndex2 = scanner.nextInt();
+                    grafo.addDirectedEdge(nodeIndex1, nodeIndex2);
+                    break;
+
+                case 4:
+                    System.out.println("Digite os índices dos nós que deseja conectar e o peso da aresta (separados por espaço): ");
+                    nodeIndex1 = scanner.nextInt();
+                    nodeIndex2 = scanner.nextInt();
+                    int weight = scanner.nextInt();
+                    grafo.addUndirectedWeightedEdge(nodeIndex1, nodeIndex2, weight);
+                    break;
+
+                case 5:
+                    System.out.println("Digite o índice do nó de partida: ");
+                    int startIndex = scanner.nextInt();
+                    grafo.breadthFirstSearch(startIndex);
+                    break;
+
+                case 6:
+                    System.out.println("Digite o índice do nó de partida: ");
+                    startIndex = scanner.nextInt();
+                    grafo.depthFirstSearch(startIndex);
+                    break;
+
+                case 7:
+                    System.out.println("Encerrando o programa...");
+                    break;
+
+                default:
+                    System.out.println("Opção inválida. Tente novamente.");
+            }
+        }
 
         scanner.close();
+    
 
 		
 		
