@@ -68,7 +68,7 @@ public class Vertice {
 
     
     public Aresta existeAresta(int destino){
-        return null;
+    	return this.arestas.find(destino);
 
     }
     
@@ -108,9 +108,6 @@ public class Vertice {
         return this.visitado;
     }
 
-    public List<Integer> vizinhos() {
-        List<Integer> result =  new LinkedList<Integer>();
-        
-        return result;
-    }
+    
+    
 }

@@ -1,12 +1,5 @@
 package entities;
 
-import java.io.BufferedReader;
-import java.io.BufferedWriter;
-import java.io.File;
-import java.io.FileReader;
-import java.io.FileWriter;
-import java.io.IOException;
-
 /** 
  * MIT License
  *
@@ -31,212 +24,144 @@ import java.io.IOException;
  * SOFTWARE.
  */
 
-/**
+/** 
  * Classe básica para um Grafo simples não direcionado.
  */
 public class Grafo {
+    public final String nome;
+    private ABB<Vertice> vertices;
+    
 
-	public final String nome;
-	private ABB<Vertice> vertices;
-	int numVertice;
-	int numAresta;
-	int[][] matrizIncidencia;
+    public static Grafo grafoCompleto(int ordem){
+        return null;
+    }
 
-	public static Grafo grafoCompleto(int ordem) {
-		return null;
-	}
+    /**
+     * Construtor. Cria um grafo vazio com um nome escolhido pelo usuário. Em caso de nome não informado 
+     * (string vazia), recebe o nome genérico "Grafo"
+     */
+    public Grafo(String nome){
+        if(nome.length()==0) 
+            this.nome = "Grafo";
+        else
+            this.nome = nome;
+        this.vertices = new ABB<>();
+    }
 
-	/**
-	 * Construtor. Cria um grafo vazio com um nome escolhido pelo usuário. Em caso
-	 * de nome não informado (string vazia), recebe o nome genérico "Grafo"
-	 */
-	public Grafo(String nome) {
-		if (nome.length() == 0)
-			this.nome = "Grafo";
-		else
-			this.nome = nome;
-		this.vertices = new ABB<>();
-	}
+    /**
+     * Retorna o nome do grafo (string), caso seja necessário em outras classes/sistemas
+     * @return O nome do grafo (uma string)
+     */
+    public String nome(){
+        return this.nome;
+    }
 
-	/**
-	 * Retorna o nome do grafo (string), caso seja necessário em outras
-	 * classes/sistemas
-	 * 
-	 * @return O nome do grafo (uma string)
-	 */
-	public String nome() {
-		return this.nome;
-	}
 
-	public void carregar() {
-		// GrafoEntrada.txt
-		// usar as classes Vertice e Aresta futuramente
+    public void carregar(String nomeArquivo){
 
-		File grafo = new File(
-				"C:\\Users\\Pedro\\Desktop\\Projeto2\\projeto2-grupo4-g2\\codigo\\Grafos\\src\\GrafoEntrada.txt");
-		try (BufferedReader br = new BufferedReader(new FileReader(grafo))) {
+    }
 
-			String linha = br.readLine();
-			String campos[] = linha.split(",");
-			numVertice = campos.length;
-			matrizIncidencia = new int[numVertice][numVertice];
-			
-			
-			numAresta = 0;
-			int j = 0;
-			while ((linha ) != null) {
-				campos = linha.split(",") ;
-				for (int i = 0; i < numVertice; i++) {
-					if (campos[i].equals("1")) {
-						numAresta++;
-					}
-				}
+    public void salvar(String nomeArquivo){
+        
+    }
+    
+    /**
+     * Adiciona um vértice com o id especificado. Ignora a ação e retorna false se já existir
+     * um vértice com este id
+     * @param id O identificador do vértice a ser criado/adicionado
+     * @return TRUE se houve a inclusão do vértice, FALSE se já existia vértice com este id
+     */
+    public boolean addVertice(int id){
+        Vertice novo = new Vertice(id);
+        return this.vertices.add(id, novo);
+    }
 
-				for (int i = 0; i < numVertice; i++) {
-					matrizIncidencia[j][i] = Integer.parseInt(campos[i]);
-					
+    
+    
+    
+    public Vertice removeVertice(int id){
+    	return null;
+    }
 
-				}
-				
+    
+    
+    public Vertice existeVertice(int idVertice){
+    	return this.vertices.find(idVertice);
+    }
 
-				j++;
-				linha = br.readLine();
-			}
+    /**
+     * Adiciona uma aresta entre dois vértices do grafo, caso os dois vértices existam no grafo. 
+     * Caso a aresta já exista, ou algum dos vértices não existir, o comando é ignorado e retorna FALSE.
+     * @param origem Vértice de origem
+     * @param destino Vértice de destino
+     * @param peso Peso da aresta
+     * @return TRUE se foi inserida, FALSE caso contrário
+     */
+    public boolean addAresta(int origem, int destino, int peso){
+        boolean adicionou = false;
+        Vertice saida = this.existeVertice(origem);
+        Vertice chegada = this.existeVertice(destino);
+        if(saida!=null && chegada !=null){
+            adicionou = (saida.addAresta(destino, peso)&&chegada.addAresta(origem, peso));
+        }
+        return adicionou;
 
-			br.close();
-			System.out.println("Grafo carregado com sucesso");
-			
-			System.out.println(numVertice);
-			System.out.println(numAresta);
-			
-		}
+    }
 
-		catch (IOException e) {
-			System.out.println("Error reading file: " + e.getMessage());
-		}
 
-	}
+    public Aresta removeAresta(int origem, int destino){
+        Vertice saida = this.existeVertice(origem);
+        if(saida != null){
+            Aresta removida = saida.removeAresta(destino);
+            if(removida != null){
+                Vertice chegada = this.existeVertice(destino);
+                chegada.removeAresta(origem);
+            }
+            return removida;
+        }
+        return null;
+    }
 
-	public void imprimir() {
-		for (int i = 0; i < numVertice; i++) {
-			for (int j = 0; j < numVertice; j++) {
-				
-				System.out.print(matrizIncidencia[i][j] + ",");
-			}
-			
+    
 
-			System.out.println();
-		}
-	}
+    
+    public Aresta existeAresta(int verticeA, int verticeB) {
+        Vertice saidaA = this.existeVertice(verticeA);
+        Vertice saidaB = this.existeVertice(verticeB);
+        if (saidaA == null || saidaB == null) {
+            return null;
+        }
+        return saidaA.existeAresta(verticeB);
+    }
 
-	public void salvar() {
-		// GrafoSaida.txt
 
-		File saida = new File(
-				"C:\\Users\\Pedro\\Desktop\\Projeto2\\projeto2-grupo4-g2\\codigo\\Grafos\\src\\GrafoSaida.txt");
+    
+    public void completo(int n){
+    	   for (int i = 0; i < n; i++) {
+    	        for (int j = i + 1; j < n; j++) {
+    	            this.addAresta(i, j, 1);
+    	            this.addAresta(j, i, 1);
+    	        }
+    	    }
+    }
 
-		try (BufferedWriter bw = new BufferedWriter(new FileWriter(saida))) {
+    public Grafo subGrafo(Lista<Integer> vertices){
+        Grafo subgrafo = new Grafo("Subgrafo de "+this.nome);
+        
+        return subgrafo;
+    }
+    
+    public int tamanho(){
+        return Integer.MIN_VALUE;
+    }
 
-			// Esse for ta zuado
+    public int ordem(){
+        return Integer.MIN_VALUE;
+    }
+    
 
-			for (int i = 0; i < numVertice; i++) {
-				System.out.println();
-				for (int j = 0; j < numVertice; j++) {
-					bw.write(matrizIncidencia[i][j] + ",");
+    
+    }
 
-					System.out.print(matrizIncidencia[i][j] + ",");
-				}
-				bw.write("\n");
+    
 
-			}
-			System.out.println();
-			System.out.println();
-			System.out.println("Matriz de incidência salva com sucesso!");
-		} catch (IOException e) {
-			System.out.println("Erro ao salvar matriz de incidência: " + e.getMessage());
-		}
-
-	}
-
-	/**
-	 * Adiciona um vértice com o id especificado. Ignora a ação e retorna false se
-	 * já existir um vértice com este id
-	 * 
-	 * @param id O identificador do vértice a ser criado/adicionado
-	 * @return TRUE se houve a inclusão do vértice, FALSE se já existia vértice com
-	 *         este id
-	 */
-	public boolean addVertice(int id) {
-		Vertice novo = new Vertice(id);
-		return this.vertices.add(id, novo);
-	}
-
-	public Vertice removeVertice(int id) {
-		return null;
-	}
-
-	public Vertice existeVertice(int idVertice) {
-		return null;
-	}
-
-	// Metodo para gerar um grafo completo(Grafo onde cada vertice se liga a todos
-	// os outros vertices, matriz de incidencia toda preenchida com exceção das
-	// posições 1 1, 2 2, 3 3 etc)
-
-	// Metodo para gerar um subgrafo a partir da matriz de incidencia do grafo
-	// original
-
-	// Criar grafos com arestas ponderadas(|Vertice v1, Vertice v2, Int peso)
-
-	// PARTE 2
-	// Criar a classe Grafo Mutavel que pode ter arestas ponderadas/direcionadas ou
-	// não
-
-	/**
-	 * Adiciona uma aresta entre dois vértices do grafo, caso os dois vértices
-	 * existam no grafo. Caso a aresta já exista, ou algum dos vértices não existir,
-	 * o comando é ignorado e retorna FALSE.
-	 * 
-	 * @param origem  Vértice de origem
-	 * @param destino Vértice de destino
-	 * @param peso    Peso da aresta
-	 * @return TRUE se foi inserida, FALSE caso contrário
-	 */
-	public boolean addAresta(int origem, int destino, int peso) {
-		boolean adicionou = false;
-		Vertice saida = this.existeVertice(origem);
-		Vertice chegada = this.existeVertice(destino);
-		if (saida != null && chegada != null) {
-			adicionou = (saida.addAresta(destino, peso) && chegada.addAresta(origem, peso));
-		}
-		return adicionou;
-
-	}
-
-	public Aresta removeAresta(int origem, int destino) {
-		return null;
-	}
-
-	public Aresta existeAresta(int verticeA, int verticeB) {
-		return null;
-	}
-
-	public boolean completo() {
-		return false;
-	}
-
-	public Grafo subGrafo(Lista<Integer> vertices) {
-		Grafo subgrafo = new Grafo("Subgrafo de " + this.nome);
-
-		return subgrafo;
-	}
-
-	public int tamanho() {
-		return Integer.MIN_VALUE;
-	}
-
-	public int ordem() {
-		return Integer.MIN_VALUE;
-	}
-
-}

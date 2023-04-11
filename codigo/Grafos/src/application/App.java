@@ -10,17 +10,25 @@ public class App {
 
 	public static void main(String[] args) throws IOException {		
 		
-		Grafo grafo = new Grafo("Grafo1");
 		
-		grafo.carregar();
-		grafo.salvar();
+		Grafo g = new Grafo("Grafo");
 		
-		
-		Grafo g =  new Grafo("grafo");
 		g.addVertice(1);
 		g.addVertice(2);
+		g.addVertice(3);
+		g.addVertice(4);
 		
-		g.addAresta(1, 2, 1);
+		
+		System.out.println("Aresta adicionada: "+g.addAresta(1, 2, 1));		
+		
+		System.out.println("Existe aresta: " + g.existeAresta(1, 2));
+		
+		System.out.println( g.existeVertice(1));
+		
+		System.out.println(g.removeAresta(1, 2));
+		
+		
+		
 		
 		
 		
@@ -29,9 +37,6 @@ public class App {
 	}
 	
 	
- 	public static void addVertice() {
- 	}	
  	
- 	public static void addAresta() {}
 
 }
