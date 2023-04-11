@@ -21,7 +21,9 @@ public class Program {
             System.out.println("4 - Adicionar aresta ponderada");
             System.out.println("5 - Busca em largura");
             System.out.println("6 - Busca em profundidade");
-            System.out.println("7 - Sair");
+            System.out.println("7 - Gerar grafo completo");
+            System.out.println("8 - Imprimir matriz de adjacencia");
+            System.out.println("9 - Sair");
 
             opcao = scanner.nextInt();
 
@@ -39,21 +41,21 @@ public class Program {
                     break;
 
                 case 2:
-                    System.out.println("Digite os índices dos nós que deseja conectar (separados por espaço): ");
+                    System.out.println("Digite os índices dos nós que deseja conectar (separados por enter): ");
                     int nodeIndex1 = scanner.nextInt();
                     int nodeIndex2 = scanner.nextInt();
                     grafo.addUndirectedEdge(nodeIndex1, nodeIndex2);
                     break;
 
                 case 3:
-                    System.out.println("Digite os índices dos nós que deseja conectar (separados por espaço): ");
+                    System.out.println("Digite os índices dos nós que deseja conectar (separados por enter): ");
                     nodeIndex1 = scanner.nextInt();
                     nodeIndex2 = scanner.nextInt();
                     grafo.addDirectedEdge(nodeIndex1, nodeIndex2);
                     break;
 
                 case 4:
-                    System.out.println("Digite os índices dos nós que deseja conectar e o peso da aresta (separados por espaço): ");
+                    System.out.println("Digite os índices dos nós que deseja conectar e o peso da aresta (separados por enter): ");
                     nodeIndex1 = scanner.nextInt();
                     nodeIndex2 = scanner.nextInt();
                     int weight = scanner.nextInt();
@@ -73,7 +75,18 @@ public class Program {
                     break;
 
                 case 7:
-                    System.out.println("Encerrando o programa...");
+                	grafo.completeGraph();                   
+                	System.out.println(grafo.toString());
+                    break;     
+                    
+                case 8:
+                	System.out.println("Imprimir o grafo em matriz de adjacencia");
+                	System.out.println(grafo.toString());
+
+                    break;
+                    
+                case 9:
+                    System.out.println("Saindo...");
                     break;
 
                 default:
@@ -85,7 +98,7 @@ public class Program {
     
 
 		
-		
+		/*
 		
 		ArrayList<GraphNode> nodeList1 = new ArrayList<GraphNode>();
 		nodeList1.add(new GraphNode("A",0));

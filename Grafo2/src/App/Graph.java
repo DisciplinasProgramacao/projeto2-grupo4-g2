@@ -47,7 +47,8 @@ public class Graph {
 	 * 
 	 * 
 	 */
-	public void createSubGraph() {}
+	
+	
 	
 	public void breadthFirstSearch(int startIndex) {
 	    // Cria uma lista de vertices visitados e uma fila de vertices a serem visitados
