@@ -1,7 +1,5 @@
 package entities;
 
-import java.util.List;
-
 /** 
  * MIT License
  *
@@ -31,7 +29,12 @@ import java.util.List;
  */
 public class Grafo {
     public final String nome;
-    private ABB<Vertice> vertices;
+    public  ABB<Vertice> vertices;
+     
+    
+    //Vertice [] ret = vertices.allElements(ret);
+    
+    //Vertice[] a = vertices.allElements(a);
     
 
     public static Grafo grafoCompleto(int ordem){
@@ -158,6 +161,8 @@ public class Grafo {
 
     
     public int tamanho(){
+    	
+    	
         return Integer.MIN_VALUE;
     }
 

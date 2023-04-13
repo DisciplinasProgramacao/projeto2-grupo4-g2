@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.util.Scanner;
 
 import entities.Grafo;
+import entities.Vertice;
 
 public class App {
 
@@ -36,6 +37,7 @@ public class App {
 		g.addVertice(4);
 		
 		
+		/*
 		System.out.println("Aresta Ponderada adicionada: "+g.addArestaPonderada(1, 2, 1));
 		
 		System.out.println("Aresta NAO-Ponderada adicionada: "+g.addAresta(2, 3));
@@ -46,11 +48,16 @@ public class App {
 		
 		System.out.println("Aresta removida: " + g.removeAresta(1, 2));
 		
+		*/
+		
+		Vertice[] a = new Vertice[50];
+		
+		System.out.println(g.vertices.allElements(a));
 		
 		
-		
-		
-		
+		for(int i =0; i<a.length;i++) {
+			System.out.println(a);
+		}
 		
 
 	}
